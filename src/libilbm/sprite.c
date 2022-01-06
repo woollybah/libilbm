@@ -37,13 +37,13 @@ ILBM_Sprite *ILBM_createSprite(void)
     return sprite;
 }
 
-IFF_Chunk *ILBM_readSprite(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readSprite(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_Sprite *sprite = ILBM_createSprite();
     
     if(sprite != NULL)
     {
-	if(!IFF_readUWord(file, &sprite->spritePrecedence, CHUNKID, "spritePrecedence"))
+	if(!IFF_readUWord(context, &sprite->spritePrecedence, CHUNKID, "spritePrecedence"))
 	{
 	    ILBM_free((IFF_Chunk*)sprite);
 	    return NULL;

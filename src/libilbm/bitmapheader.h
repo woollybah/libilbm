@@ -68,7 +68,7 @@ ILBM_BitMapHeader;
 
 ILBM_BitMapHeader *ILBM_createBitMapHeader(void);
 
-IFF_Chunk *ILBM_readBitMapHeader(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readBitMapHeader(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeBitMapHeader(FILE *file, const IFF_Chunk *chunk);
 

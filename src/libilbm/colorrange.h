@@ -50,7 +50,7 @@ ILBM_ColorRange;
 
 ILBM_ColorRange *ILBM_createColorRange(void);
 
-IFF_Chunk *ILBM_readColorRange(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readColorRange(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeColorRange(FILE *file, const IFF_Chunk *chunk);
 

@@ -53,7 +53,7 @@ ILBM_CMYKMap *ILBM_createCMYKMap(void);
 
 ILBM_CMYKRegister *ILBM_addCMYKRegisterInCMYKMap(ILBM_CMYKMap *cmykMap);
 
-IFF_Chunk *ILBM_readCMYKMap(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readCMYKMap(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeCMYKMap(FILE *file, const IFF_Chunk *chunk);
 

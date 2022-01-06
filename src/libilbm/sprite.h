@@ -44,7 +44,7 @@ ILBM_Sprite;
 
 ILBM_Sprite *ILBM_createSprite(void);
 
-IFF_Chunk *ILBM_readSprite(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readSprite(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeSprite(FILE *file, const IFF_Chunk *chunk);
 

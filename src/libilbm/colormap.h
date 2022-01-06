@@ -53,7 +53,7 @@ ILBM_ColorMap *ILBM_createColorMap(void);
 
 ILBM_ColorRegister *ILBM_addColorRegisterInColorMap(ILBM_ColorMap *colorMap);
 
-IFF_Chunk *ILBM_readColorMap(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readColorMap(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeColorMap(FILE *file, const IFF_Chunk *chunk);
 

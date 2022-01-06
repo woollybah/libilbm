@@ -41,37 +41,37 @@ ILBM_ColorRange *ILBM_createColorRange(void)
     return colorRange;
 }
 
-IFF_Chunk *ILBM_readColorRange(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readColorRange(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_ColorRange *colorRange = ILBM_createColorRange();
     
     if(colorRange != NULL)
     {
-	if(!IFF_readWord(file, &colorRange->pad1, CHUNKID, "pad1"))
+	if(!IFF_readWord(context, &colorRange->pad1, CHUNKID, "pad1"))
 	{
 	    ILBM_free((IFF_Chunk*)colorRange);
 	    return NULL;
 	}
     
-	if(!IFF_readWord(file, &colorRange->rate, CHUNKID, "rate"))
+	if(!IFF_readWord(context, &colorRange->rate, CHUNKID, "rate"))
 	{
 	    ILBM_free((IFF_Chunk*)colorRange);
 	    return NULL;
 	}
     
-	if(!IFF_readWord(file, &colorRange->active, CHUNKID, "active"))
+	if(!IFF_readWord(context, &colorRange->active, CHUNKID, "active"))
 	{
 	    ILBM_free((IFF_Chunk*)colorRange);
 	    return NULL;
 	}
     
-	if(!IFF_readUByte(file, &colorRange->low, CHUNKID, "low"))
+	if(!IFF_readUByte(context, &colorRange->low, CHUNKID, "low"))
 	{
 	    ILBM_free((IFF_Chunk*)colorRange);
 	    return NULL;
 	}
     
-	if(!IFF_readUByte(file, &colorRange->high, CHUNKID, "high"))
+	if(!IFF_readUByte(context, &colorRange->high, CHUNKID, "high"))
 	{
 	    ILBM_free((IFF_Chunk*)colorRange);
 	    return NULL;

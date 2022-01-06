@@ -48,7 +48,7 @@ ILBM_DestMerge;
 
 ILBM_DestMerge *ILBM_createDestMerge(void);
 
-IFF_Chunk *ILBM_readDestMerge(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readDestMerge(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeDestMerge(FILE *file, const IFF_Chunk *chunk);
 

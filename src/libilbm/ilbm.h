@@ -29,6 +29,8 @@
 extern "C" {
 #endif
 
+IFF_Chunk *ILBM_readIo(io_context *context);
+
 IFF_Chunk *ILBM_readFd(FILE *file);
 
 IFF_Chunk *ILBM_read(const char *filename);

@@ -37,13 +37,13 @@ ILBM_Viewport *ILBM_createViewport(void)
     return viewport;
 }
 
-IFF_Chunk *ILBM_readViewport(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readViewport(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_Viewport *viewport = ILBM_createViewport();
     
     if(viewport != NULL)
     {
-	if(!IFF_readLong(file, &viewport->viewportMode, CHUNKID, "viewportMode"))
+	if(!IFF_readLong(context, &viewport->viewportMode, CHUNKID, "viewportMode"))
 	{
 	    ILBM_free((IFF_Chunk*)viewport);
 	    return NULL;

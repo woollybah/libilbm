@@ -44,7 +44,7 @@ ILBM_DPIHeader;
 
 ILBM_DPIHeader *ILBM_createDPIHeader(void);
 
-IFF_Chunk *ILBM_readDPIHeader(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readDPIHeader(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeDPIHeader(FILE *file, const IFF_Chunk *chunk);
 

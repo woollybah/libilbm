@@ -44,7 +44,7 @@ ILBM_Point2D;
 
 ILBM_Point2D *ILBM_createGrab(void);
 
-IFF_Chunk *ILBM_readGrab(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readGrab(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeGrab(FILE *file, const IFF_Chunk *chunk);
 

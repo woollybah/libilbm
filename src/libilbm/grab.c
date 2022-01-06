@@ -37,19 +37,19 @@ ILBM_Point2D *ILBM_createGrab(void)
     return point2d;
 }
 
-IFF_Chunk *ILBM_readGrab(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readGrab(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_Point2D *point2d = ILBM_createGrab();
     
     if(point2d != NULL)
     {
-	if(!IFF_readWord(file, &point2d->x, CHUNKID, "x"))
+	if(!IFF_readWord(context, &point2d->x, CHUNKID, "x"))
 	{
 	    ILBM_free((IFF_Chunk*)point2d);
 	    return NULL;
 	}
     
-	if(!IFF_readWord(file, &point2d->y, CHUNKID, "y"))
+	if(!IFF_readWord(context, &point2d->y, CHUNKID, "y"))
 	{
 	    ILBM_free((IFF_Chunk*)point2d);
 	    return NULL;

@@ -95,7 +95,7 @@ ILBM_DFade *ILBM_addDFadeToDRange(ILBM_DRange *drange)
     return dfade;
 }
 
-IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readDRange(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_DRange *drange = ILBM_createDRange(0);
     
@@ -104,37 +104,37 @@ IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize)
 	IFF_UByte nregs, ntrue;
 	unsigned int i;
     
-	if(!IFF_readUByte(file, &drange->min, CHUNKID, "min"))
+	if(!IFF_readUByte(context, &drange->min, CHUNKID, "min"))
 	{
 	    ILBM_free((IFF_Chunk*)drange);
 	    return NULL;
 	}
     
-	if(!IFF_readUByte(file, &drange->max, CHUNKID, "max"))
+	if(!IFF_readUByte(context, &drange->max, CHUNKID, "max"))
 	{
 	    ILBM_free((IFF_Chunk*)drange);
 	    return NULL;
 	}
     
-	if(!IFF_readWord(file, &drange->rate, CHUNKID, "rate"))
+	if(!IFF_readWord(context, &drange->rate, CHUNKID, "rate"))
 	{
 	    ILBM_free((IFF_Chunk*)drange);
 	    return NULL;
 	}
     
-	if(!IFF_readWord(file, &drange->flags, CHUNKID, "flags"))
+	if(!IFF_readWord(context, &drange->flags, CHUNKID, "flags"))
 	{
 	    ILBM_free((IFF_Chunk*)drange);
 	    return NULL;
 	}
 	
-	if(!IFF_readUByte(file, &ntrue, CHUNKID, "ntrue"))
+	if(!IFF_readUByte(context, &ntrue, CHUNKID, "ntrue"))
 	{
 	    ILBM_free((IFF_Chunk*)drange);
 	    return NULL;
 	}
     
-	if(!IFF_readUByte(file, &nregs, CHUNKID, "nregs"))
+	if(!IFF_readUByte(context, &nregs, CHUNKID, "nregs"))
 	{
 	    ILBM_free((IFF_Chunk*)drange);
 	    return NULL;
@@ -144,25 +144,25 @@ IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize)
 	{
 	    ILBM_DColor *dcolor = ILBM_addDColorToDRange(drange);
 	
-	    if(!IFF_readUByte(file, &dcolor->cell, CHUNKID, "dcolor.cell"))
+	    if(!IFF_readUByte(context, &dcolor->cell, CHUNKID, "dcolor.cell"))
 	    {
 		ILBM_free((IFF_Chunk*)drange);
 		return NULL;
 	    }
 	
-	    if(!IFF_readUByte(file, &dcolor->r, CHUNKID, "dcolor.r"))
+	    if(!IFF_readUByte(context, &dcolor->r, CHUNKID, "dcolor.r"))
 	    {
 		ILBM_free((IFF_Chunk*)drange);
 		return NULL;
 	    }
 	
-	    if(!IFF_readUByte(file, &dcolor->g, CHUNKID, "dcolor.g"))
+	    if(!IFF_readUByte(context, &dcolor->g, CHUNKID, "dcolor.g"))
 	    {
 		ILBM_free((IFF_Chunk*)drange);
 		return NULL;
 	    }
 	
-	    if(!IFF_readUByte(file, &dcolor->b, CHUNKID, "dcolor.b"))
+	    if(!IFF_readUByte(context, &dcolor->b, CHUNKID, "dcolor.b"))
 	    {
 		ILBM_free((IFF_Chunk*)drange);
 		return NULL;
@@ -173,13 +173,13 @@ IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize)
 	{
 	    ILBM_DIndex *dindex = ILBM_addDIndexToDRange(drange);
     
-	    if(!IFF_readUByte(file, &dindex->cell, CHUNKID, "dindex.cell"))
+	    if(!IFF_readUByte(context, &dindex->cell, CHUNKID, "dindex.cell"))
 	    {
 		ILBM_free((IFF_Chunk*)drange);
 		return NULL;
 	    }
 
-	    if(!IFF_readUByte(file, &dindex->index, CHUNKID, "dindex.index"))
+	    if(!IFF_readUByte(context, &dindex->index, CHUNKID, "dindex.index"))
 	    {
 		ILBM_free((IFF_Chunk*)drange);
 		return NULL;
@@ -192,13 +192,13 @@ IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize)
 	    
 	    increaseChunkSizeWithFades(drange);
 	    
-	    if(!IFF_readUByte(file, &nfades, CHUNKID, "nfades"))
+	    if(!IFF_readUByte(context, &nfades, CHUNKID, "nfades"))
 	    {
 	        ILBM_free((IFF_Chunk*)drange);
 	        return NULL;
 	    }
 	    
-	    if(!IFF_readUByte(file, &drange->pad, CHUNKID, "pad"))
+	    if(!IFF_readUByte(context, &drange->pad, CHUNKID, "pad"))
 	    {
 	        ILBM_free((IFF_Chunk*)drange);
 	        return NULL;
@@ -208,13 +208,13 @@ IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize)
 	    {
 		ILBM_DFade *dfade = ILBM_addDFadeToDRange(drange);
 		
-		if(!IFF_readUByte(file, &dfade->cell, CHUNKID, "dfade.cell"))
+		if(!IFF_readUByte(context, &dfade->cell, CHUNKID, "dfade.cell"))
 		{
 		    ILBM_free((IFF_Chunk*)drange);
 		    return NULL;
 		}
 		
-		if(!IFF_readUByte(file, &dfade->fade, CHUNKID, "dfade.fade"))
+		if(!IFF_readUByte(context, &dfade->fade, CHUNKID, "dfade.fade"))
 		{
 		    ILBM_free((IFF_Chunk*)drange);
 		    return NULL;

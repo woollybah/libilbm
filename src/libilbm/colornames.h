@@ -50,7 +50,7 @@ ILBM_ColorNames *ILBM_createColorNames(void);
 
 void ILBM_addColorName(ILBM_ColorNames *colorNames, char *colorName);
 
-IFF_Chunk *ILBM_readColorNames(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readColorNames(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeColorNames(FILE *file, const IFF_Chunk *chunk);
 

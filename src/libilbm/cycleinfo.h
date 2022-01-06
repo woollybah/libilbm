@@ -51,7 +51,7 @@ ILBM_CycleInfo;
 
 ILBM_CycleInfo *ILBM_createCycleInfo(void);
 
-IFF_Chunk *ILBM_readCycleInfo(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readCycleInfo(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeCycleInfo(FILE *file, const IFF_Chunk *chunk);
 

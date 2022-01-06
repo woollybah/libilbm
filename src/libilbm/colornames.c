@@ -60,7 +60,7 @@ void ILBM_addColorName(ILBM_ColorNames *colorNames, char *colorName)
     colorNames->chunkSize += colorNameSize;
 }
 
-IFF_Chunk *ILBM_readColorNames(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readColorNames(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_ColorNames *colorNames = ILBM_createColorNames();
     
@@ -68,13 +68,13 @@ IFF_Chunk *ILBM_readColorNames(FILE *file, const IFF_Long chunkSize)
     {
         unsigned int i, colorNamesLength;
         
-        if(!IFF_readUWord(file, &colorNames->startingColor, CHUNKID, "startingColor"))
+        if(!IFF_readUWord(context, &colorNames->startingColor, CHUNKID, "startingColor"))
         {
             ILBM_free((IFF_Chunk*)colorNames);
             return NULL;
         }
         
-        if(!IFF_readUWord(file, &colorNames->endingColor, CHUNKID, "endingColor"))
+        if(!IFF_readUWord(context, &colorNames->endingColor, CHUNKID, "endingColor"))
         {
             ILBM_free((IFF_Chunk*)colorNames);
             return NULL;
@@ -92,7 +92,7 @@ IFF_Chunk *ILBM_readColorNames(FILE *file, const IFF_Long chunkSize)
             
             do
             {
-                c = fgetc(file); /* Read character */
+                c = fgetc(context); /* Read character */
                 
                 if(c == EOF) /* We should never reach the end of the file prematurely */
                 {
@@ -117,7 +117,7 @@ IFF_Chunk *ILBM_readColorNames(FILE *file, const IFF_Long chunkSize)
     }
     
     /* Read the padding byte, if needed */
-    if(!IFF_readPaddingByte(file, chunkSize, CHUNKID))
+    if(!IFF_readPaddingByte(context, chunkSize, CHUNKID))
     {
         ILBM_free((IFF_Chunk*)colorNames);
         return NULL;

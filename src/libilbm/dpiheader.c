@@ -37,19 +37,19 @@ ILBM_DPIHeader *ILBM_createDPIHeader(void)
     return dpiHeader;
 }
 
-IFF_Chunk *ILBM_readDPIHeader(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readDPIHeader(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_DPIHeader *dpiHeader = ILBM_createDPIHeader();
     
     if(dpiHeader != NULL)
     {
-	if(!IFF_readUWord(file, &dpiHeader->dpiX, CHUNKID, "dpiX"))
+	if(!IFF_readUWord(context, &dpiHeader->dpiX, CHUNKID, "dpiX"))
 	{
 	    ILBM_free((IFF_Chunk*)dpiHeader);
 	    return NULL;
 	}
     
-	if(!IFF_readUWord(file, &dpiHeader->dpiY, CHUNKID, "dpiY"))
+	if(!IFF_readUWord(context, &dpiHeader->dpiY, CHUNKID, "dpiY"))
 	{
 	    ILBM_free((IFF_Chunk*)dpiHeader);
 	    return NULL;

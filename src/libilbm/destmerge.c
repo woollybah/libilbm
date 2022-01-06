@@ -41,37 +41,37 @@ ILBM_DestMerge *ILBM_createDestMerge(void)
     return destMerge;
 }
 
-IFF_Chunk *ILBM_readDestMerge(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readDestMerge(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_DestMerge *destMerge = ILBM_createDestMerge();
     
     if(destMerge != NULL)
     {
-	if(!IFF_readUByte(file, &destMerge->depth, CHUNKID, "depth"))
+	if(!IFF_readUByte(context, &destMerge->depth, CHUNKID, "depth"))
 	{
 	    ILBM_free((IFF_Chunk*)destMerge);
 	    return NULL;
 	}
     
-	if(!IFF_readUByte(file, &destMerge->pad1, CHUNKID, "pad1"))
+	if(!IFF_readUByte(context, &destMerge->pad1, CHUNKID, "pad1"))
 	{
 	    ILBM_free((IFF_Chunk*)destMerge);
 	    return NULL;
 	}
 
-	if(!IFF_readUWord(file, &destMerge->planePick, CHUNKID, "planePick"))
+	if(!IFF_readUWord(context, &destMerge->planePick, CHUNKID, "planePick"))
 	{
 	    ILBM_free((IFF_Chunk*)destMerge);
 	    return NULL;
 	}
     
-	if(!IFF_readUWord(file, &destMerge->planeOnOff, CHUNKID, "planeOnOff"))
+	if(!IFF_readUWord(context, &destMerge->planeOnOff, CHUNKID, "planeOnOff"))
 	{
 	    ILBM_free((IFF_Chunk*)destMerge);
 	    return NULL;
 	}
     
-	if(!IFF_readUWord(file, &destMerge->planeMask, CHUNKID, "planeMask"))
+	if(!IFF_readUWord(context, &destMerge->planeMask, CHUNKID, "planeMask"))
 	{
 	    ILBM_free((IFF_Chunk*)destMerge);
 	    return NULL;

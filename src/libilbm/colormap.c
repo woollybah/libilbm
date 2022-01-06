@@ -55,7 +55,7 @@ ILBM_ColorRegister *ILBM_addColorRegisterInColorMap(ILBM_ColorMap *colorMap)
     return colorRegister;
 }
 
-IFF_Chunk *ILBM_readColorMap(FILE *file, const IFF_Long chunkSize)
+IFF_Chunk *ILBM_readColorMap(io_context *context, const IFF_Long chunkSize)
 {
     ILBM_ColorMap *colorMap = ILBM_createColorMap();
     
@@ -65,26 +65,26 @@ IFF_Chunk *ILBM_readColorMap(FILE *file, const IFF_Long chunkSize)
 	{
 	    ILBM_ColorRegister *colorRegister = ILBM_addColorRegisterInColorMap(colorMap);
 	
-	    if(!IFF_readUByte(file, &colorRegister->red, CHUNKID, "colorRegister.red"))
+	    if(!IFF_readUByte(context, &colorRegister->red, CHUNKID, "colorRegister.red"))
 	    {
 		ILBM_free((IFF_Chunk*)colorMap);
 		return NULL;
 	    }
 	
-	    if(!IFF_readUByte(file, &colorRegister->green, CHUNKID, "colorRegister.green"))
+	    if(!IFF_readUByte(context, &colorRegister->green, CHUNKID, "colorRegister.green"))
 	    {
 		ILBM_free((IFF_Chunk*)colorMap);
 		return NULL;
 	    }
 	
-	    if(!IFF_readUByte(file, &colorRegister->blue, CHUNKID, "colorRegister.blue"))
+	    if(!IFF_readUByte(context, &colorRegister->blue, CHUNKID, "colorRegister.blue"))
 	    {
 		ILBM_free((IFF_Chunk*)colorMap);
 		return NULL;
 	    }
 	}
     
-	if(!IFF_readPaddingByte(file, chunkSize, CHUNKID))
+	if(!IFF_readPaddingByte(context, chunkSize, CHUNKID))
 	{
 	    ILBM_free((IFF_Chunk*)colorMap);
 	    return NULL;

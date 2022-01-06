@@ -89,7 +89,7 @@ ILBM_DIndex *ILBM_addDIndexToDRange(ILBM_DRange *drange);
 
 ILBM_DFade *ILBM_addDFadeToDRange(ILBM_DRange *drange);
 
-IFF_Chunk *ILBM_readDRange(FILE *file, const IFF_Long chunkSize);
+IFF_Chunk *ILBM_readDRange(io_context *context, const IFF_Long chunkSize);
 
 int ILBM_writeDRange(FILE *file, const IFF_Chunk *chunk);
 
